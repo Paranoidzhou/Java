@@ -1,4 +1,4 @@
-package map;
+.package map;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import java.util.Set;
  */
 class MapDemo3 {
 	public static void main(String[] args) {
-		Map<String,Integer> map 
+		 Map<String,Integer> map 
 //				= new HashMap<String,Integer>(1000000);    //括号里可以传参也可以不传参，默认容量为16，建议预估所需要的容量以便于后来的使用且不扩容
 	         = new LinkedHashMap<String,Integer>();    //在new HashMap的关键做一些改变（LinkedHashMap），会使得元素可以有序的遍历	
 		map.put("语文", 150);
@@ -55,6 +55,7 @@ class MapDemo3 {
 			System.out.println(key+"|"+value);
 		}
 		System.out.println("=================================");
+
 		/*
 		 * 遍历所有的value:
 		 * Collection values()
