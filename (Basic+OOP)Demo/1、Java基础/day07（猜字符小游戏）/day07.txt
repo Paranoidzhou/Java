@@ -1,0 +1,345 @@
+回顾:
+1.数组:
+  1)复制:
+    1.1)System.arraycopy(a,1,a1,0,4);
+	1.2)int[] a1 = Arrays.copyOf(a,6);
+	    a = Arrays.copyOf(a,a.length+1);
+  2)排序:
+    2.1)Arrays.sort(arr);
+	2.2)冒泡:
+	    2.2.1)四个数冒三轮
+		2.2.2)每一轮都是从第1个元素开始，
+		      每一次都是和它的下一个元素比
+		2.2.3)冒出来了就不带它玩了
+2.方法:
+    封装特定的业务逻辑功能，一个方法只干一件事
+	多次调用，减少重复，便于维护、便于团队协作开发
+3.方法的定义:
+    修饰词 返回值类型 方法名(参数列表){
+	  方法体
+	}
+4.方法的调用:
+  1)无返回值: 方法名(有参传参);
+  2)有返回值: 数据类型 变量 = 方法名(有参传参);
+              方法名(有参传参);----------不建议
+5.return:
+  1)return 值; //1.1)结束方法 1.2)返回结果给调用方
+  2)return;    //2.1)结束方法
+
+
+
+
+正课:
+一.猜字符小游戏:
+   1.设计数据结构:变量
+     1)char[] chs;   //随机字符数组
+	 2)char[] input; //用户输入的字符数组
+	 3)int[] result; //对比结果
+	 4)int score;    //得分
+   2.设计程序结构:方法
+     1)主方法:
+	   public static void main(String[] args){
+	     //...
+	   }
+	 2)生成随机字符数组chs:
+	   public static char[] generate(){
+	     char[] chs = new char[5];
+		 //...
+         return chs;
+	   }
+	 3)对比:随机字符数组chs与用户输入的字符数组input
+	   public static int[] check(char[] chs,char[] input){
+	     int[] result = new int[2];
+		 //...
+		 return result;
+	   }
+   3.设计算法:方法体
+
+
+练习:
+1.独立完成猜字符小游戏
+
+当日事当日毕
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+讲语法-----------------------吃糖豆
+讲项目-----------------------吃药
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+听得懂，就是写不出来---------------正常的
+欠练
+思路是学出来的，是练出来的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B:位置对个数为5
+C:字符对个数为5，并且，位置对个数为5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.藏起来一个数chs
+2.猜吧!接收用户输入的数input
+3.对比:
+  1)猜对了，则算分结束
+  2)猜错了，提示，并继续第2步
+
+
+基本数据类型判断相等----------用==
+String类型判断内容相等--------不能用==，用equals()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+while(true){ //自造死循环
+  
+}
+
+
+
+
+String str = scan.next(); //"ABCDE"
+char[] input = str.toCharArray();
+
+input[0]='A'
+input[1]='B'
+input[2]='C'
+input[3]='D'
+input[4]='E'
+
+
+
+
+
+
+
+
+
+
+
+
+
+public static char[] generate(){
+  char[] chs = new char[5];
+   
+  char[] letters = {'A','B','C','D',...,'Y','Z'};
+  boolean[] flags = new boolean[letters.length]; //开关数组
+  for(int i=0;i<chs.length;i++){
+    do{
+	  int index = (int)(Math.random()*letters.length); //0到25
+	}while(flags[index]==true);
+    chs[i] = letters[index];
+    flags[index] = true;
+  }
+
+  i=0 index=0           chs[0]='A' flags[0]=true
+  i=1 index=25          chs[1]='Z' flags[25]=true
+  i=2 index=0/25/0/25/1 chs[2]='B' flags[1]=true
+  i=3 index=0/1/25
+
+
+  
+
+  
+
+
+  i=0 index=1  chs[0]='B'
+  i=1 index=25 chs[1]='Z'
+  i=2 index=1  chs[2]='B'
+  i=3
+  i=4
+
+  return chs;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+位置对是在字符对的基础之上的
+
+
+public static int[] check(char[] chs,char[] input){
+  int[] result = new int[2]; //0,0，假设result[0]为位置对，result[1]为字符对
+  
+  for(int i=0;i<chs.length;i++){
+    for(int j=0;j<input.length;j++){
+	  if(chs[i]==input[j]){ //字符对
+	    result[1]++; //字符对个数增1
+        if(i==j){ //位置对
+		  result[0]++; //位置对个数增1
+		}
+		break; //剩余input元素不再参与比较了
+	  }
+	}
+  }
+  
+  i=0
+    j=0 chs0-input0
+	j=1 chs0-input1
+	j=2 chs0-input2
+	j=3 chs0-input3
+	j=4 chs0-input4
+  i=1
+    j=0 chs1-input0
+	j=1 chs1-input1
+	j=2 chs1-input2
+	j=3 chs1-input3
+	j=4 chs1-input4
+  i=2
+    j=0 chs2-input0
+	j=1 chs2-input1
+	j=2 chs2-input2
+	j=3 chs2-input3
+	j=4 chs2-input4
+
+  return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Guessing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int a,b;
+int[] c;
+
+char c1,c2,c3,c4,c5;
+char[] input;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+小代码---------语法
+经典案例-------小业务
+小项目---------复杂业务(逻辑能力)
+
+
+
+
+
+
+
+
+
+
+
+
+

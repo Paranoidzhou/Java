@@ -1,0 +1,489 @@
+回顾:
+1.for:固定次数
+2.break:跳出循环
+  continue:跳过循环体中剩余语句而进入下一次循环
+3.嵌套循环:
+    循环中套循环，外层走一次，内层走所有次
+	层数越少越好，break只能跳出一层循环
+4.数组:
+    引用类型，相同数据类型元素的集合
+	int[] arr = new int[10];
+	int[] arr = {1,4,6};
+	int[] arr = new int[]{1,4,6};
+	System.out.println(arr.length); //10
+    arr[0] = 100;
+	arr[10] = 100; //数组下标越界
+	System.out.println(arr[arr.length-1]);
+    for(int i=0;i<arr.length;i++){
+	  arr[i] = 100;
+	  System.out.println(arr[i]);
+	}
+
+
+
+笔记:
+1.数组:
+  7)数组的复制:
+    7.1)System.arraycopy(a,1,a1,0,4);
+	7.2)int[] a1 = Arrays.copyOf(a,6);
+	    a = Arrays.copyOf(a,a.length+1); //数组的扩容
+  8)数组的排序:
+    8.1)Arrays.sort(arr); //升序
+	8.2)冒泡排序:
+	    8.2.1)五个数冒四轮
+		8.2.2)每一轮都是从第1个元素开始冒
+		      每一次都是和它的下一个元素比
+		8.2.3)冒出来的就不带它玩了
+2.方法:
+  1)封装一段特定的业务逻辑功能
+  2)方法尽可能的独立，只干一件事
+  3)方法可以被反复多次的调用
+  4)减少代码重复，有利于代码的维护，有利于团队的协作开发
+3.方法的定义:
+    修饰词 返回值类型 方法名(参数列表){
+	  方法体
+	}
+4.方法的调用:
+  1)无返回值: 方法名(有参传参);
+  2)有返回值: 数据类型 变量 = 方法名(有参传参);
+5)return的用法:
+  1)return 值; //1.1)结束方法的执行  1.2)返回结果给调用方
+  2)return;    //2.1)结束方法的执行
+
+
+练习:-------------每人至少两次
+1)将数组元素最大值放在最后一个元素的下一个位置MaxOfArray
+2)冒泡排序BubbleSort
+3)运行Guessing了解明天项目的需求
+
+
+
+完成课后作业
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+方法可以嵌套调用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public static void main(String[] args){
+  say();
+  sayHi("zhangsan");
+  String n = "lisi";
+  sayHi(n); //String name="lisi"
+
+  double a = getNum();
+  System.out.println(a); //88.88
+  int m = plus(5,6);----------------------------实参
+  System.out.println(m); //11
+
+  int a=5,b=6;
+  int q = plus(a,b);----------------------------实参
+  System.out.println(q);
+}
+public static int plus(int a,int b){
+  int c = a+b;
+  return c;
+}
+public static double getNum(){
+  return 88.88;
+}
+public static void sayHi(String name){--------------形参
+  System.out.println("大家好，我叫"+name);
+}
+public static void say(){
+  System.out.println("大家好，我叫WKJ");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MethodDemo
+
+
+
+
+方法可以有参与可以无参
+------有参可以使方法更加灵活
+
+
+
+System.out.          println("Hello");
+System.              arraycopy(a,1,a1,0,4);
+Arrays.              sort(arr);
+int[] a1 = Arrays.   copyOf(a,6);----------------有参数
+
+int    a = scan.     nextInt();
+double b = scan.     nextDouble();
+double c = Math.     random();-------------------无参数
+
+
+
+double c = Math.random();
+
+假设random()有参:
+  double c = Math.random(1,1000);
+  double c = Math.random(0,99);
+  double c = Math.random(1,100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+方法可以有返回值也可以没有返回值:
+1)无返回值时，返回值类型设计为void
+2)有返回值时，返回值类型设计为具体的数据类型即可
+
+
+方法执行完后:
+  若后期需要用到方法中的某个数据------设计为有返回值
+  若后期不再需要用到方法中的某个数据----设计为无返回值
+
+
+System.out.println("Hello");
+System.arraycopy(a,1,a1,0,4);
+Arrays.sort(arr);---------------------无返回值
+
+int    a = scan.nextInt();
+double b = scan.nextDouble();
+double c = Math.random();
+int[] a1 = Arrays.copyOf(a,6);--------有返回值
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a(){存}
+b(){取}
+c(){转帐}
+
+张三--------调a()+b()+c()
+李四--------调b()
+王五--------调c()
+赵六--------调a()+c()
+
+
+
+
+
+
+
+
+
+
+
+main(){
+  调存款---------1行
+  调取款---------1行
+  调转帐---------1行
+  调查询余额-----1行
+}
+存款(){
+  500行
+}
+取款(){
+  500行-------------调验证密码()
+}
+转帐(){
+  1500行-------------调验证密码()
+}
+查询余额(){
+  500-------------调验证密码()
+}
+验证密码(){
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+B/S:浏览器/服务器
+
+项目功能完成，交给用户--------用户不一定满意(效率的)
+
+项目优化
+
+
+
+
+
+
+
+
+
+
+
+代码优化
+
+
+long a = System.currentTimeMillis();
+复杂业务的逻辑----换了一种实现方式----换一种实现方式
+long b = System.currentTimeMillis();
+
+System.out.println(b-a); //2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int[] arr = {67,23,45,1}; //升序(1,23,45,67)
+for(int i=0;i<arr.length-1;i++){ //控制轮数
+  for(int j=0;j<arr.length-1-i;j++){ //控制次数
+    if(arr[j]>arr[j+1]){
+	  int t = arr[j];
+	  arr[j] = arr[j+1];
+	  arr[j+1] = t;
+	}
+  }
+}
+
+BubbleSort
+
+
+i=0
+  j=0 67和23比，换，23,67,45,1
+  j=1 67和45比，换，23,45,67,1
+  j=2 67和1比，换，23,45,1,67-------67出来了
+i=1
+  j=0 23和45比，不换
+  j=1 45和1比，换，23,1,45,67-------45出来了
+i=2
+  j=0 23和1比，换，1,23,45,67-------23出来了
+  
+
+
+
+           arr.length-1-i
+i=0(第1轮) 比3次
+i=1(第2轮) 比2次
+i=2(第3轮) 比1次
+
+
+
+第一轮:
+  67和23比，换，23,67,45,1
+  67和45比，换，23,45,67,1
+  67和1比，换，23,45,1,67-------------67冒出来了
+第二轮:
+  23和45比，不换
+  45和1比，换，23,1,45,67-------------45冒出来了
+第三轮:
+  23和1比，换，1,23,45,67-------------23冒出来了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1)不同的数据用不同的排序算法，优劣也是不同的
+    这30万个数据-----------------插入排序最快
+	另30万个数据-----------------冒泡排序最快
+	另30万个数据-----------------快速排序最快
+2)有一种排序方式一直是最最快的
+    Arrays.sort(arr); //升序    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int[] a = {10,20,30,40,50};
+int[] a1 = new int[6]; //0,0,0,0,0,0
+
+
+
+
+for(int i=0;i<a.length;i++){
+  a1[i]=a[i];
+}
+
+a1[0]=a[0];
+a1[1]=a[1];
+a1[2]=a[2];
+a1[3]=a[3];
+a1[4]=a[4];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+完成一个小聊天室
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int num=1;
+while(num<=10){
+  num++;
+}
+System.out.println(num); //11
+
+
+int num;
+for(num=1;num<=10;num++){
+}
+System.out.println(num); //11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

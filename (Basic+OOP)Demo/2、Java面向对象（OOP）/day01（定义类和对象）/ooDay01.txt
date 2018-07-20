@@ -1,0 +1,665 @@
+Shoot射击游戏第一天:
+1)创建了6个对象类，并创建World类测试
+
+
+
+正课:
+1.什么是类？什么是对象？
+  1)现实世界是由很多对象组成的
+    基于对象抽出了类
+  2)对象:真实存在的单个个体
+    类:类型/类别，代表一类个体
+  3)类中可以包含:
+    3.1)所有对象所共有的属性/特征----------------成员变量
+	3.2)所有对象所共有的行为---------------------方法
+  4)一个类可以创建多个对象
+    同一类型所创建出来的对象，结构相同，数据不同
+  5)类是对象的模板，对象是类具体的实例
+2.如何创建类？如何创建对象？如何访问成员？
+
+
+
+练习:
+1)将今天的内容重写两次
+2)oo.day02中设计Student和StudentTest
+
+当日事当日毕
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Hero{ //英雄机
+  width,height,x,y,life,doubleFire
+
+  void step(){} //切换图片
+  void moveTo(){} //随着鼠标移动
+  
+}
+
+
+class Airplane{
+  width,height,x,y,speed
+  void step(){}
+}
+
+
+MeShoot
+cn.tedu.shoot
+Hero
+Airplane
+BigAirplane
+Bee
+Bullet
+Sky
+World
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1)先找对象:英雄机、天空、小敌机、大敌机、小蜜蜂、子弹
+2)抽类:Hero、Sky、Airplane、BigAirplane、Bee、Bullet
+3)设计类中的成员变量和方法(下周讲业务再详细做)
+4)创建对象并测试
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+角色:
+  英雄机、子弹、小敌机、大敌机、小蜜蜂、天空
+
+关系:
+1)英雄机可以发射子弹
+2)子弹可以射击小敌机、大敌机、小蜜蜂
+3)小敌机、大敌机、小蜜蜂可以撞英雄机
+4)英雄机、子弹、小敌机、大敌机、小蜜蜂都在天空上飞
+
+规则:
+1)英雄机可以单倍火力(火力值为0)或双倍火力(火力值大于0)
+2)子弹打中小敌机-----------------玩家得1分
+  子弹打中大敌机-----------------玩家得3分
+  子弹打中小蜜蜂-----------------英雄机得奖励(1条命或40火力值)
+  子弹发射一次双倍火力，则火力值减2
+3)小敌机、大敌机、小蜜蜂与英雄机撞上后
+  英雄机减命同时清空火力值-----英雄机命数为0则游戏结束
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   引用
+类(数据类型)   引用类型变量   指向     对象
+Student            zs          =      new Student();
+
+
+
+
+数据类型  引用  指向     对象
+Student   zs     =     new Student();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    基本类型变量(变量)
+int a = 5;
+      赋值
+
+
+
+
+
+
+
+
+
+
+
+
+
+new Student();----------------------一般不这样做
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+引用类型----------默认值null
+
+oo.day01
+Student
+StudentTest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  类                 对象
+月饼模子             月饼
+
+
+
+
+
+
+
+
+
+
+
+Student zs = new Student();
+zs.name = "zhangsan";
+zs.age = 25;
+zs.address = "河北廊坊";
+zs.stuId = "001";
+zs.eat();
+zs.sleep();
+zs.study();
+zs.abc = 250; //编译错误，没有abc属性
+
+Student ls = new Student();
+ls.name = "lisi";
+ls.age = 26;
+ls.address = "黑龙江佳木斯";
+ls.stuId = "002";
+ls.eat();
+ls.sleep();
+ls.study();
+
+class Student{ //学生
+  String name;
+  int age;
+  String address;
+  String stuId;
+  void eat(){}
+  void sleep(){}
+  void study(){}
+}
+
+
+
+Student zs = new Student();
+Student ls = new Student();
+Student ww = new Student();
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Teacher{ //老师
+  String name;
+  int age;
+  String address;
+  double salary;
+  void eat(){}
+  void sleep(){}
+  void play(){}
+  void teach(){}
+}
+
+class Student{ //学生
+  String name;
+  int age;
+  String address;
+  String stuId;
+  void eat(){}
+  void sleep(){}
+  void study(){}
+}
+
+class Dog{ //狗
+  String color;
+  String type;
+  void 叫(){}
+  void 看门(){}
+}
+
+class Car{ //汽车
+  String type;
+  String color;
+  double price;
+  void run(){}
+  void back(){}
+  void stop(){}
+}
+
+
+
+对象                     类
+WKJ                      老师
+GKK
+XY
+
+张三                     学生
+李四
+王五
+
+小花                     狗
+小黑
+小强
+
+马六                     汽车                     
+奥迪
+奥拓
+
+
+
+class Emp{ //Emp就是我自己造的一个数据类型，名为Emp
+  String name;
+  int age;
+  double salary;
+  void print(){
+    System.out.println("姓名:"+name);
+	System.out.println("年龄:"+age);
+	System.out.println("工资:"+salary);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+面向过程的结构化程序设计弊端:
+1)缺乏对数据的封装
+2)数据与方法(操作数据)的分离
+
+基本类型-------------------只能装一个数据
+数组类型-------------------必须数据类型相同
+自己造数据类型-------------想装什么就装什么
+
+
+
+class Emp{ //Emp就是我自己造的一个数据类型，名为Emp
+  String name;
+  int age;
+  double salary;
+  void print(){
+    System.out.println("姓名:"+name);
+	System.out.println("年龄:"+age);
+	System.out.println("工资:"+salary);
+  }
+}
+
+class Test{ //测试类
+  public static void main(String[] args){
+    Emp e = new Emp(); //创建了一个雇员对象
+    e.name = "zhangsan";
+	e.age = 25;
+	e.salary = 5000;
+    e.print();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+高质量的代码:
+  复用性好、扩展性好、维护性好、
+  可移植性好、健壮性好、可读性好、效率好...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+开发经理
+
+
+抽了4个人，花费2个月的时间-----------设计了一套架构
+
+
+福州夜间施工-----加功能(30万)
+我一个人，每天最多一个小时---------干了5天
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+清华思路------------环保、GIS、MIS
+
+40、50人-----项目多
+一个组5个人左右
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OA办公系统(产品)-------国家机关
+Java-------------重做
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A:加一些东西
+B:加一些东西
+C:加一些东西
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+产品:可以适应很多家公司的
+项目:只能适应一家公司的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+面向对象:OO
+
+面向对象分析------OOA
+面向对象设计------OOD
+面向对象分析与设计-----OOAD
+
+面向对象编程------OOP--------------你们所参与的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+晕乎乎的----------------------正常的
+
+不晕:
+1)什么也不懂
+2)自以为不晕------------------很不错很不错的了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+迭代的
+
+
+
+
+
+
+
+
+
+
+语言基础:
+1.固定的(画一个圆形)
+2.去银行取钱
+
+面向对象:
+1.抽象的(画一个图形)
+2.向着社会主义社会发展
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+射击游戏项目
+理论+项目
+
+
+
+
+
+
+
+
+
+
+
+
+
+面向对象------讲9天+1天
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

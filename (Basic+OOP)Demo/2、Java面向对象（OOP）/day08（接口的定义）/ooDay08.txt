@@ -1,0 +1,603 @@
+Shoot射击游戏第一天:
+1.创建6个对象类，并创建World类测试
+
+Shoot射击游戏第二天:
+1.创建了6个对象类的构造方法，在World类中测试
+
+Shoot射击游戏第三天:
+1.设计小敌机数组、大敌机数组、小蜜蜂数组、子弹数组，并测试
+2.设计FlyingObject超类，6个对象类继承超类
+3.给FlyingObject超类设计了两个构造方法，6个派生类中分别调用
+
+Shoot射击游戏第四天:
+1.将小敌机数组、大敌机数组、小蜜蜂数组合为FlyingObject数组
+2.在6个派生类中重写step()
+3.画窗口
+
+Shoot射击游戏第五天:
+1.将类中的成员添加访问控制修饰符
+2.设置图片属性
+
+Shoot射击游戏第六天:
+1.画对象:
+  1)想画对象，得先去获取对象的图片，
+    每个对象都得获取图片，意味着获取图片行为为共有的行为，
+	  所以需要将获取图片的行为设计在FlyingObject超类中，
+    每个对象获取图片的行为都是不一样的，
+      所以获取图片的行为设计为抽象方法
+	--------在FlyingObject类中设计抽象方法getImage()
+  2)在获取对象的图片时，需要去考虑对象的状态(生命周期)，
+    状态分三种(活着的、死了的(未删除)、删除的)，
+	在实际应用中，状态都应设计为常量，
+	每个对象都有状态，所以将状态设计在FlyingObject超类中，
+	--------在FlyingObject类中设计三个常量和变量(存储当前状态)
+    在获取图片时，需要去判断每个对象的状态，用于获取不同的图片，
+	所以对象状态判断的行为为共有的行为，设计在FlyingObject超类中，
+	每个对象判断状态的行为都是一样的，设计为普通方法
+	--------在FlyingObject类中设计isLife()/isDead()/isRemove()
+  3)在派生类中重写getImage()用于在不同状态下获取不同的图片
+    3.1)Sky天空，直接返回image
+	3.2)Bullet子弹:
+	    3.2.1)若活着的，直接返回image
+		3.2.2)若死了的，就删除
+    3.3)Airplane小敌机:
+        3.3.1)若活着呢，返回第1张图片
+        3.3.2)若死了呢，从第2张图到第5张图轮换，第5张图后可以删除了
+    3.4)Airplane小敌机:
+        3.4.1)若活着呢，返回第1张图片
+        3.4.2)若死了呢，从第2张图到第5张图轮换，第5张图后可以删除了
+	3.5)Airplane小敌机:
+        3.5.1)若活着呢，返回第1张图片
+        3.5.2)若死了呢，从第2张图到第5张图轮换，第5张图后可以删除了
+    3.6)Hero英雄机:
+	    3.6.1)若活着呢，返回2张图片的切换
+  4)图片有了，就可以开画了，6个对象都可开画，属于共有的行为，
+      所以将画的行为设计在FlyingObject超类中，
+	所有对象画的行为都是一样的，所以设计为普通方法
+	--------在FlyingObject超类中设计普通方法paintObject()画对象
+  5)因为Sky天空是两张图，所以需要重写超类的paintObject()
+    --------在Sky类中重写paintObject()
+  6)画的行为完以后，只需要在窗口上调用即可
+    --------在World类中重写paint()，而后调用paintObject()
+
+Shoot射击游戏第七天:
+1.敌人入场:
+  1)敌人是由窗口产生的，所以在World中设计nextOne()生成敌人对象
+  2)敌人入场为定时发生的，在run()中调用enterAction()实现敌人入场
+    在enterAction()中:
+	  每400毫秒调用nextOne()获取敌人，enemies扩容，装在最后一个元素上
+2.子弹入场:
+  1)子弹是由英雄机发射出来的，所以在Hero中设计shoot()生成子弹对象
+  2)子弹入场为定时发生的，在run()中调用shootAction()实现子弹入场
+    在shootAction()中:
+	  每300毫秒调用hero的shoot()获取子弹，bullets扩容，数组追加
+3.飞行物移动:
+  1)移动是所有对象所共有的行为，并且每个对象移动的形为都是不一样的，
+    所以在超类FlyingObject中设计了抽象方法step()，派生类重写step()
+  2)飞行物移动为定时发生的，在run()中调用stepAction()实现飞行物移动
+    在stepAction()中:
+	  天空动，遍历敌人而后敌人动，遍历子弹而后子弹动
+
+Shoot射击游戏第八天:
+1.英雄机随着鼠标移动:
+  1)英雄机移动是英雄机的行为，所以在Hero中设计moveTo(x,y)实现英雄机随着鼠标移动
+  2)英雄机随着鼠标移动是事件触发的，在侦听器中重写mouseMoved()鼠标移动事件
+    在mouseMoved()中:
+	  获取鼠标的x和y坐标，而后英雄机随着动
+2.删除越界的飞行物:
+  1)越界检查为所有飞行物都具备的行为，只是每个对象的具体行为不一样，
+    在超类FlyingObject中设计抽象方法outOfBounds()，6个派生类中分别重写
+  2)删除越界飞行物为定时发生的，所以在run()中调用outOfBoundsAction()
+    在outOfBoundsAction()中:
+	  声明不越界敌人/子弹数组，遍历enemies/bullets，获取每个敌人或子弹
+	  判断若不越界，则将对象添加到不越界敌人/子弹数组中，
+	  将不越界敌人/子弹数组复制到enemies/bullets中
+3.设计Enemy得分接口，而后Airplane和BigAirplane实现接口
+  设计Award奖励接口，而后Bee实现接口
+
+
+
+
+回顾:
+1.成员内部类:
+    类中套类，内部类对外不具备可见性，
+	内部类对象通常是在外部类中创建的，
+	内部类中可以直接访问外部类的成员(包括私有的)
+	  内部类中有个隐式的引用指向了创建它的外部类对象
+	     外部类名.this.
+2.匿名内部类:
+    若想创建一个类的对象，并且对象只创建一次，
+	此时该类不必命名，称之为匿名内部类
+
+
+笔记:
+1.接口:
+  1)是一种数据类型(引用类型)
+  2)由interface定义的
+  3)只能包含常量和抽象方法
+  4)接口不能被实例化
+  5)接口是需要被实现/继承的，实现类/派生类:
+       必须重写接口中的所有抽象方法
+  6)一个类可以实现多个接口，用逗号分隔
+    若又继承又实现时，应先继承后实现
+  7)接口可以继承接口
+
+
+设计规则:
+1)将所有派生类所共有的属性和行为，抽到超类中---------抽共性
+2)所有派生类的行为都一样，设计为普通方法
+  所有派生类的行为都不一样，设计为抽象方法
+3)将部分派生类所共有的行为，抽到接口中
+  符合既是也是原则时，使用接口
+  接口是对继承的单根性的扩展-------------实现多继承
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Enemy
+Award
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+子弹打掉小敌机-------------------玩家得1分
+子弹打掉大敌机-------------------玩家得3分
+
+子弹打掉小蜜蜂-------------------英雄机得奖励(命、火力值)
+子弹打掉大黄蜂-------------------英雄机得奖励、玩家得分
+
+abstract class FlyingObject{
+  width,height,x,y,
+  step(),getImage()...
+}
+interface Enemy{ //得分接口
+  int getScore();
+}
+interface Award{ //奖励接口
+  int getAwardType();
+}
+class Bee extends FlyingObject implements Award{
+  public int getAwardType(){ }
+}
+class BigYellowBee extends FlyingObject implements Award,Enemy{
+  public int getAwardType(){ }
+  public int getScore(){ }
+}
+
+
+
+
+
+
+
+
+class Airplane extends FlyingObject implements Enemy{
+  public int getScore(){ return 1; }
+}
+class BigAirplane extends FlyingObject implements Enemy{
+  public int getScore(){ return 3; }
+}
+
+class Hero extends FlyingObject{
+}
+class Bullet extends FlyingObject{
+}
+class Sky extends FlyingObject{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+类和类-------------------继承extends
+接口和接口---------------继承extends
+类和接口-----------------实现implements
+
+
+Inter1 o1 = new Inter1(); //编译错误，接口不能实例化
+Inter2 o2 = new Aoo(); //向上造型
+Inter1 o3 = new Aoo(); //向上造型
+
+
+
+
+
+
+
+interface Inter1{
+  void show();
+}
+interface Inter2 extends Inter1{
+  void test();
+}
+class Aoo implements Inter2{
+  public void test(){}
+  public void show(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface Inter1{
+  void show();
+}
+interface Inter2{
+  void test();
+}
+abstract class Aoo{
+  abstract void say();
+}
+class Boo extends Aoo implements Inter1,Inter2{
+  public void show(){}
+  public void test(){}
+  void say(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface Inter1{
+  void show();
+  void test();
+}
+class Aoo implements Inter1{
+  public void show(){}
+  public void test(){}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+Inter1 o1 = new Inter1();
+
+
+
+
+
+
+
+
+
+interface Inter1{
+  public static final int NUM = 5;
+  public abstract void show();
+  int COUNT = 6; //默认public static final
+  void test();   //默认public abstract
+
+  int nn; //编译错误，常量必须声明同时初始化
+  void say(){} //编译错误，抽象方法不能有方法体
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+abstract class Aoo{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+设计规则:
+1)
+2)
+3)
+
+
+
+
+面向过程编程
+面向对象编程
+面向接口编程
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+只待了5天
+接口、继承
+派生类
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+效率-------------------硬件来解决
+复用性、扩展性---------只能代码来解决
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------只要不越界的
+public void outOfBoundsAction(){
+  int index = 0; //1)下标  2)不越界敌人个数
+  FlyingObject[] enemyLives = new FlyingObject[enemies.length];
+  for(int i=0;i<enemies.length;i++){
+    FlyingObject f = enemies[i];
+    if(!f.outOfBounds()){ //不越界
+	  enemyLives[index] = f; 
+	  index++;
+	}
+  }
+  enemies = Arrays.copyOf(enemyLives,index);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+共50个敌人，其中有20个越界了
+---------------缩20次
+
+------------------------看到越界的就删除
+public void outOfBoundsAction(){
+  for(int i=0;i<enemies.length;i++){
+    FlyingObject f = enemies[i];
+    if(f.outOfBounds()){ //越界了
+	  将f从enemies数组中删除(缩容)
+	}
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+删除越界的飞行物:
+1)先写行为:
+    删除越界飞行物时，需要先判断飞行物是否越界
+	每个对象都需要做出判断，所以将判断越界行为设计在超类中
+    每个对象判断越界的行为都是不一样的，所以设计为抽象方法
+	而后每个派生类中重写抽象方法
+2)页面调用:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+swing相关的:
+1)事件:发生了一个事
+2)事件处理:发生事之后所做的操作
+3)侦听器:
+  3.1)有一个侦听器
+  3.2)把侦听器装到窗口去
+
+
+
+MouseAdapter l = new MouseAdapter(){
+  public void mouseMoved(MouseEvent e){
+    //英雄机随着鼠标移动
+  }
+};
+this.addMouseListener(l); //鼠标操作事件
+this.addMouseMotionListener(l); //鼠标滑动事件
+
+
+
+
+class Aoo extends MouseAdapter{
+}
+
+
+
+
+
+
+
+
+
+
+事件                  事件处理
+鼠标点击              启动状态变为运行状态
+鼠标移动              英雄机随着鼠标动
+鼠标移出              运行状态变为暂停状态
+鼠标移入              暂停状态变为运行状态
+
+
+
+
+
+
+
+
+
+
+
+
+项目功能:
+1.英雄机随着鼠标动
+2.删除越界的飞行物
+3.设计两个接口
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
