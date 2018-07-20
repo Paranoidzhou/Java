@@ -11,7 +11,7 @@ public class InvokeMethodDemo5 {
 		/*  利用反射API动态执行对象的方法*/
 		Scanner in = new Scanner(System.in);
 		System.out.println("请输入类名：");
-		String className = in.nextLine();
+		Strng className = in.nextLine();
 		System.out.println("请输入方法名：");
 		String methodName = in.nextLine();
 		System.out.println("输入属性名：");

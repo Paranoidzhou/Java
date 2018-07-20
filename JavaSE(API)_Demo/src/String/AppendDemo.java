@@ -5,7 +5,7 @@ package String;
 public class AppendDemo {
 	public static void main(String[] args) {
 		StringBuilder builder = new StringBuilder();  //实例化StringBuilder对象
-		builder.append("流星雨");								 //调用append()方法写入字符串
+		builder.append("流星雨");					  //调用append()方法写入字符串
 		System.out.println(builder.length());		 //输出字符串长度
 		System.out.println(builder.capacity());		 //输出容量
 		builder.append("一天不吃饭，然后");					 //多次调用append()方法会拼接上次写入的字符串
